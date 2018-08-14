@@ -1,4 +1,6 @@
 
+function playGame() {
+
 var wins = document.getElementById('wins').innerHTML;
 var losses = document.getElementById('losses').innerHTML;
 var lettersGuessed = [];
@@ -23,6 +25,12 @@ function updateCurrentWords () {
     document.getElementById('currentWordFormatted').innerHTML = currentWordFormatted.join(' ');
 }
 
+function resetGame () {
+    lettersGuessed = [];
+    document.getElementById('lettersGuessed').innerHTML = '';
+    guessesRemaining = 10;
+    document.getElementById('winLose').innerHTML = ' ';
+}
 var listOfRandomWords = [ 
     "change", "cherries", "humor", "bike","cushion",
     "idea", "wood", "channel", "wire", "rice",
@@ -90,22 +98,28 @@ document.onkeyup = function (event) {
 
     if (currentWordFormatted.join() === secretWord.join()) {
         
-        alert("Winner");
         wins++;
-        document.getElementsByClassName(".button").innerHTML = "<h1>Hello</h1>";
-        console.log(document.getElementsByClassName(".button").innerHTML);
+        document.getElementById("winLose").innerHTML = "<h1>Winner. Press any key to play again.</h1>";
+        document.onkeyup = function (event) {
+            resetGame();
+            playGame();
+        }
 
     }
     if (guessesRemaining === 0) {
         
-        alert("Loser");
         losses++;
+        document.getElementById("winLose").innerHTML = "<h1>Loser. Press any key to play again.</h1>";
+        document.onkeyup = function (event) {
+            resetGame();
+            playGame();
+        }
     };
     updateScore ();
 }
+}
 
-
-
+playGame();
 
 
 
