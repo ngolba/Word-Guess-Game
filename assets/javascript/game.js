@@ -92,7 +92,8 @@ document.onkeyup = function (event) {
         
         alert("Winner");
         wins++;
-        document.getElementsByClassName("button").innerHTML = "<button type='button'>New Game</button>";
+        document.getElementsByClassName(".button").innerHTML = "<h1>Hello</h1>";
+        console.log(document.getElementsByClassName(".button").innerHTML);
 
     }
     if (guessesRemaining === 0) {
@@ -108,6 +109,6 @@ document.onkeyup = function (event) {
 
 
 
-
+// "<button type='reset'>New Game</button>"
 
 
