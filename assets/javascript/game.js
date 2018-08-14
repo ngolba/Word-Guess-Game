@@ -37,10 +37,10 @@ var listOfRandomWords = [
 ];
 
 function chooseWord () {
-    var randomNumber = Math.floor(Math.random() * 50);
-    var chosenWord = listOfRandomWords[randomNumber];
-    var formattedWord = chosenWord.split('');
-    return formattedWord;
+var randomNumber = Math.floor(Math.random() * 50);
+var chosenWord = listOfRandomWords[randomNumber];
+var formattedWord = chosenWord.split('');
+return formattedWord;
 }
 
 var secretWord = chooseWord();
@@ -82,13 +82,18 @@ document.onkeyup = function (event) {
         updateGuesses();
     }
 
+    console.log(currentWordFormatted);
+    console.log(secretWord);
+
     updateLettersGuessed();
     updateCurrentWords();
 
-    if (currentWordFormatted === secretWord) {
+    if (currentWordFormatted.join() === secretWord.join()) {
         
         alert("Winner");
         wins++;
+        document.getElementsByClassName("button").innerHTML = "<button type='button'>New Game</button>";
+
     }
     if (guessesRemaining === 0) {
         
