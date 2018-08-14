@@ -29,6 +29,7 @@ function resetGame () {
     lettersGuessed = [];
     document.getElementById('lettersGuessed').innerHTML = '';
     guessesRemaining = 10;
+    document.getElementById('guessesRemaining').innerHTML = '10';
     document.getElementById('winLose').innerHTML = ' ';
 }
 var listOfRandomWords = [ 
@@ -106,7 +107,7 @@ document.onkeyup = function (event) {
         }
 
     }
-    if (guessesRemaining === 0) {
+    if (guessesRemaining <= 0) {
         
         losses++;
         document.getElementById("winLose").innerHTML = "<h1>Loser. Press any key to play again.</h1>";
