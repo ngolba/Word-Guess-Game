@@ -4,24 +4,57 @@
     <meta charset="utf-8" />
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
 
 </head>
 <body>
-    <h1>Hangman</h1>
+    <div class="jumbotron m-4 py-1">
+        <div class="container">
+        <h1 class="display-4 text-center">Hangman</h1>
+        <p class="lead text-center">Try to guess the word!</p>
+        <p class="text-center">Press any key to get started!</p>
+        </div>  
+    </div>
 
-    <p>Try to guess the word!</p>
-    <p>Press any key to get started!</p>
+    
 
-    <h2>Current Word</h2>
-    <h1><span id="currentWordFormatted"></span></h1>
+    <div class="container"> 
+        <div class="row my-2"> 
+            <div class="col-xs 12 col-sm-12 col-md-6">
+                <div class="card  topCards">
+                    <div class="row">
+                        <div class='col-6'>
+                        <h1 class="card-body">Current Word</h1>
+                        <h3 class="card-body"><span id="currentWordFormatted"></span></h3>
+                        </div>
+                        <div class='col-6 m-0'>
+                        <img class="card-img image-responsive my-0" src="assets/images/Hang0.png" id="hangImg">
+                        </div>
+                    </div>  
+                </div>
+            </div>
 
-    <h2>Number of guesses remaining: <span id="guessesRemaining">10</span></h2>
-    <h2>Letters guessed: <span id="lettersGuessed"></span></h2>
-    <h2>Wins: <span id="wins">0</span></h2>
-    <h2>Losses: <span id="losses">0</span></h2>
+            <div class="col-xs 12 col-sm-12 col-md-6">
+                <div class="card  topCards">
+                    <h2 class="card-body">Number of guesses remaining: <span id="guessesRemaining">7</span></h2>
+                    <h2 class="card-body">Letters guessed: <span id="lettersGuessed"></span></h2>
+                </div>
+            </div>
+        </div>
 
-    <div><span id="winLose"></span></div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card text-center bottomCard">
+                    <h2 class="card-body  py-0">Wins: <span id="wins">0</span></h2>
+                    <h2 class="card-body  py-0">Losses: <span id="losses">0</span></h2>
+                </div>
+            </div>
+        </div>      
+
+        <div><span id="winLose"></span></div>
+
+    </div>
 
     <script src="assets/javascript/game.js"></script>
 </body>

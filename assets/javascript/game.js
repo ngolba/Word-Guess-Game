@@ -28,8 +28,8 @@ function updateCurrentWords () {
 function resetGame () {
     lettersGuessed = [];
     document.getElementById('lettersGuessed').innerHTML = '';
-    guessesRemaining = 10;
-    document.getElementById('guessesRemaining').innerHTML = '10';
+    guessesRemaining = 7;
+    document.getElementById('guessesRemaining').innerHTML = '7';
     document.getElementById('winLose').innerHTML = ' ';
 }
 var listOfRandomWords = [ 
@@ -44,6 +44,24 @@ var listOfRandomWords = [
     "doll", "aunt", "curtain", "cloth", "crate",
     "interest", "tiger", "lettuce", "holiday", "caption"
 ];
+
+var listOfImgs = [ "assets/images/Hang0.png" , "assets/images/Hang1.png", 
+"assets/images/Hang2.png", "assets/images/Hang3.png", 
+"assets/images/Hang4.png", "assets/images/Hang5.png",
+"assets/images/Hang6.png", "assets/images/Hang7.png",
+
+]
+
+var imgNum = 0;
+
+function nextImg (imgNum) {
+    document.getElementById('hangImg').src = listOfImgs [imgNum];
+}
+
+function resetImg () {
+    imgNum = 0;
+    document.getElementById('hangImg').src = listOfImgs [imgNum];
+}
 
 function chooseWord () {
 var randomNumber = Math.floor(Math.random() * 50);
@@ -89,6 +107,8 @@ document.onkeyup = function (event) {
     } else if (secretWord.indexOf(guess) === -1 && lettersGuessed.indexOf(guess) === -1) {
         lettersGuessed.push(guess);
         updateGuesses();
+        imgNum++;
+        nextImg(imgNum);
     }
 
     console.log(currentWordFormatted);
@@ -104,16 +124,18 @@ document.onkeyup = function (event) {
         document.onkeyup = function (event) {
             resetGame();
             playGame();
+            resetImg();
         }
 
     }
     if (guessesRemaining <= 0) {
         
         losses++;
-        document.getElementById("winLose").innerHTML = "<h1>Loser. Press any key to play again.</h1>";
+        document.getElementById("winLose").innerHTML = "<h1>Loser. Word was " + secretWord.join('') + "." + "<br>" + "Press any key to play again.</h1>";
         document.onkeyup = function (event) {
             resetGame();
             playGame();
+            resetImg();
         }
     };
     updateScore ();
