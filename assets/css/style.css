@@ -1,18 +1,3 @@
-/* #hangImg {
-    max-width: 100px;
-    height: auto;
-    margin: 0 auto;
-} */
-
-.topCards {
-    height: fit-content;
-    min-height: 260px;
+.hide {
+    display: none;
 }
-
-.bottomCard {
-    height: fit-content;
-}
-/* 
-#lettersGuessed {
-    font-size: 2vw;
-} */

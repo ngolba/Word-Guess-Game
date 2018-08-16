@@ -1,6 +1,7 @@
 
 function playGame() {
 
+document.getElementById('mainBody').classList.remove('hide');
 var wins = document.getElementById('wins').innerHTML;
 var losses = document.getElementById('losses').innerHTML;
 var lettersGuessed = [];
@@ -117,10 +118,33 @@ document.onkeyup = function (event) {
     updateLettersGuessed();
     updateCurrentWords();
 
+    // if (currentWordFormatted.join() === secretWord.join()) {
+        
+    //     wins++;
+    //     document.getElementById("winLose").innerHTML = "<h1>Winner. Press any key to play again.</h1>";
+    //     document.onkeyup = function (event) {
+    //         resetGame();
+    //         playGame();
+    //         resetImg();
+    //     }
+
+    // }
+    // if (guessesRemaining <= 0) {
+        
+    //     losses++;
+    //     document.getElementById("winLose").innerHTML = "<h1>Loser. Word was " + secretWord.join('') + "." + "<br>" + "Press any key to play again.</h1>";
+    //     document.onkeyup = function (event) {
+    //         resetGame();
+    //         playGame();
+    //         resetImg();
+    //     }
+    // };
+
     if (currentWordFormatted.join() === secretWord.join()) {
         
         wins++;
-        document.getElementById("winLose").innerHTML = "<h1>Winner. Press any key to play again.</h1>";
+        document.getElementById('mainBody').classList.add('hide');
+        document.getElementById("winLose").innerHTML = '<div class="jumbotron fixed-top m-5 text-center" ><h1>Winner!</h1>' + "<br>" + '<h1>Press any key to play again.</h1></div>';
         document.onkeyup = function (event) {
             resetGame();
             playGame();
@@ -131,21 +155,20 @@ document.onkeyup = function (event) {
     if (guessesRemaining <= 0) {
         
         losses++;
-        document.getElementById("winLose").innerHTML = "<h1>Loser. Word was " + secretWord.join('') + "." + "<br>" + "Press any key to play again.</h1>";
+        document.getElementById('mainBody').classList.add('hide');
+        document.getElementById("winLose").innerHTML = '<div class="jumbotron fixed-top m-5 text-center" ><h1>Loser. Word was ' + '"' + secretWord.join('') + '"' + ".</h1>" + "<br>" + '<h1>Press any key to play again.</h1></div>';
         document.onkeyup = function (event) {
             resetGame();
             playGame();
             resetImg();
         }
     };
+
     updateScore ();
 }
 }
 
 playGame();
 
-
-
-// "<button type='reset'>New Game</button>"
 
 
