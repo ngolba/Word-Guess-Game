@@ -9,6 +9,9 @@ var guessesRemaining = document.getElementById('guessesRemaining').innerHTML;
 var winSound = new Audio('assets/audio/slowClap.wav');
 var loseSound = new Audio('assets/audio/hornFail.wav');
 
+winSound.load();
+loseSound.load();
+
 function updateScore () {
     document.getElementById('wins').innerHTML = wins;
     document.getElementById('losses').innerHTML = losses;
