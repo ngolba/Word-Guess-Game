@@ -6,6 +6,8 @@ var wins = document.getElementById('wins').innerHTML;
 var losses = document.getElementById('losses').innerHTML;
 var lettersGuessed = [];
 var guessesRemaining = document.getElementById('guessesRemaining').innerHTML;
+var winSound = new Audio('assets/audio/slowClap.wav');
+var loseSound = new Audio('assets/audio/hornFail.wav');
 
 function updateScore () {
     document.getElementById('wins').innerHTML = wins;
@@ -146,6 +148,7 @@ document.onkeyup = function (event) {
             wins++;
             document.getElementById('mainBody').classList.add('hide');
             document.getElementById("winLose").innerHTML = '<div class="jumbotron fixed-top m-5 text-center" ><h1>You win, or whatever.</h1>' + "<br>" + '<h1>Press any key to play again.</h1></div>';
+            winSound.play();
             document.onkeyup = function (event) {
                 resetGame();
                 playGame();
@@ -158,6 +161,7 @@ document.onkeyup = function (event) {
             losses++;
             document.getElementById('mainBody').classList.add('hide');
             document.getElementById("winLose").innerHTML = '<div class="jumbotron fixed-top m-5 text-center" ><h1>The word was ' + '"' + secretWord.join('') + '"' + ", you " +  insultGenerator.generateInsult() + ".</h1>" + "<br>" + '<h1>Press any key to play again.</h1></div>';
+            loseSound.play();
             document.onkeyup = function (event) {
                 resetGame();
                 playGame();
