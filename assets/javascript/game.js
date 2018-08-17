@@ -6,7 +6,6 @@ var wins = document.getElementById('wins').innerHTML;
 var losses = document.getElementById('losses').innerHTML;
 var lettersGuessed = [];
 var guessesRemaining = document.getElementById('guessesRemaining').innerHTML;
-var winOrLoseState = false;
 
 function updateScore () {
     document.getElementById('wins').innerHTML = wins;
@@ -77,7 +76,7 @@ var currentWordFormatted = new Array (secretWord.length);
 currentWordFormatted.fill(' _ ');
 updateCurrentWords();
 
-
+console.log("Wow, you even came to the console to cheat like the plebian you are.");
 console.log(secretWord);
 console.log(currentWordFormatted);
 
@@ -103,7 +102,7 @@ var insultGenerator = {
 document.onkeyup = function (event) {
     var guess;
 
-    // Literally 90% of the code is in this if instance and won't run if a non a-z character is pressed
+    // Literally 50% of the code is in this if instance and won't run if a non a-z character is pressed
     if (event.keyCode >= 65 && event.keyCode <= 90){
         guess = event.key.toLowerCase(); 
 
@@ -127,41 +126,26 @@ document.onkeyup = function (event) {
             updateGuesses();
             imgNum++;
             nextImg(imgNum);
+            if(guessesRemaining === 4) {
+                alert("Yawn");
+            } else if (guessesRemaining === 2){
+                alert("You really don't get it, do you?");
+            } else if (guessesRemaining === 1){
+                alert("Last guess. Are you feeling lucky?");
+            }
         }
 
-        console.log(currentWordFormatted);
-        console.log(secretWord);
+        // console.log(currentWordFormatted);
+        // console.log(secretWord);
 
         updateLettersGuessed();
         updateCurrentWords();
-
-        // if (currentWordFormatted.join() === secretWord.join()) {
-            
-        //     wins++;
-        //     document.getElementById("winLose").innerHTML = "<h1>Winner. Press any key to play again.</h1>";
-        //     document.onkeyup = function (event) {
-        //         resetGame();
-        //         playGame();
-        //         resetImg();
-        //     }
-
-        // }
-        // if (guessesRemaining <= 0) {
-            
-        //     losses++;
-        //     document.getElementById("winLose").innerHTML = "<h1>Loser. Word was " + secretWord.join('') + "." + "<br>" + "Press any key to play again.</h1>";
-        //     document.onkeyup = function (event) {
-        //         resetGame();
-        //         playGame();
-        //         resetImg();
-        //     }
-        // };
 
         if (currentWordFormatted.join() === secretWord.join()) {
             
             wins++;
             document.getElementById('mainBody').classList.add('hide');
-            document.getElementById("winLose").innerHTML = '<div class="jumbotron fixed-top m-5 text-center" ><h1>Winner!</h1>' + "<br>" + '<h1>Press any key to play again.</h1></div>';
+            document.getElementById("winLose").innerHTML = '<div class="jumbotron fixed-top m-5 text-center" ><h1>You win, or whatever.</h1>' + "<br>" + '<h1>Press any key to play again.</h1></div>';
             document.onkeyup = function (event) {
                 resetGame();
                 playGame();

@@ -1,3 +1,5 @@
 .hide {
     display: none;
 }
+
+/* This could easily be one line of JQuery but I built this before we learned that */
