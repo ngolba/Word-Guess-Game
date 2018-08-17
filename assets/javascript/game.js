@@ -81,90 +81,111 @@ updateCurrentWords();
 console.log(secretWord);
 console.log(currentWordFormatted);
 
+// Credit to www.peckedtodeathbychickens.com/the-pg-insult-generator-because-sometimes-even-mom-needs-to-name-call/ for list of PG insults
+function randomIndex () {
+    return Math.floor(Math.random() * 18);
+}
+
+var insultGenerator = {
+    firstInsultWord : ["lilly-livered", "rotten", "stinky", "lame", "dim-witted", "funky", "crusty", "steamy", "drizzly", "grizzly", "squirty", "uptight", "hairy", "husky", "arrogant", "nippy", "chunky", "smelly"],
+    secondInsultWord : ["hiney", "poop", "toot", "wedgie", "stool", "fudge", "bum", "potty", "dookie", "pudding", "sphincter", "booger", "feces", "snot", "crust", "badonk-a", "crud", "sludge"],
+    thirdInsultWord : ["squeegee", "turtle", "cabbage", "bomb", "sniffer", "binkie", "stump", "nugget", "whistle", "twig", "knuckle", "burger", "hot dog", "loaf", "freckle", "soldier", "kernel", "shingle"],
+    a : randomIndex(),
+    b : randomIndex(),
+    c : randomIndex(),
+
+    generateInsult : function() {
+        return this.firstInsultWord[this.a] + ' ' + this.secondInsultWord[this.b] + ' ' + this.thirdInsultWord[this.c];
+    }
+}
+
 
 document.onkeyup = function (event) {
     var guess;
 
+    // Literally 90% of the code is in this if instance and won't run if a non a-z character is pressed
     if (event.keyCode >= 65 && event.keyCode <= 90){
         guess = event.key.toLowerCase(); 
+
+
+        // if letter is in the secret word and hasn't been guessed yet, 
+        if (secretWord.indexOf(guess) !== -1 && lettersGuessed.indexOf(guess) === -1){
+            var idxWithGuess = [];
+            var idx = secretWord.indexOf(guess);
+
+            while (idx != -1) {
+                idxWithGuess.push(idx);
+                idx = secretWord.indexOf(guess, idx + 1);
+            }
+            idxWithGuess.forEach( function (index) {
+                currentWordFormatted[index] = guess;
+            });
+
+            lettersGuessed.push(guess);
+        } else if (secretWord.indexOf(guess) === -1 && lettersGuessed.indexOf(guess) === -1) {
+            lettersGuessed.push(guess);
+            updateGuesses();
+            imgNum++;
+            nextImg(imgNum);
+        }
+
+        console.log(currentWordFormatted);
+        console.log(secretWord);
+
+        updateLettersGuessed();
+        updateCurrentWords();
+
+        // if (currentWordFormatted.join() === secretWord.join()) {
+            
+        //     wins++;
+        //     document.getElementById("winLose").innerHTML = "<h1>Winner. Press any key to play again.</h1>";
+        //     document.onkeyup = function (event) {
+        //         resetGame();
+        //         playGame();
+        //         resetImg();
+        //     }
+
+        // }
+        // if (guessesRemaining <= 0) {
+            
+        //     losses++;
+        //     document.getElementById("winLose").innerHTML = "<h1>Loser. Word was " + secretWord.join('') + "." + "<br>" + "Press any key to play again.</h1>";
+        //     document.onkeyup = function (event) {
+        //         resetGame();
+        //         playGame();
+        //         resetImg();
+        //     }
+        // };
+
+        if (currentWordFormatted.join() === secretWord.join()) {
+            
+            wins++;
+            document.getElementById('mainBody').classList.add('hide');
+            document.getElementById("winLose").innerHTML = '<div class="jumbotron fixed-top m-5 text-center" ><h1>Winner!</h1>' + "<br>" + '<h1>Press any key to play again.</h1></div>';
+            document.onkeyup = function (event) {
+                resetGame();
+                playGame();
+                resetImg();
+            }
+
+        }
+        if (guessesRemaining <= 0) {
+            
+            losses++;
+            document.getElementById('mainBody').classList.add('hide');
+            document.getElementById("winLose").innerHTML = '<div class="jumbotron fixed-top m-5 text-center" ><h1>The word was ' + '"' + secretWord.join('') + '"' + ", you " +  insultGenerator.generateInsult() + ".</h1>" + "<br>" + '<h1>Press any key to play again.</h1></div>';
+            document.onkeyup = function (event) {
+                resetGame();
+                playGame();
+                resetImg();
+            }
+        };
+
+        updateScore ();
     } else {
-        alert("Enter a letter a-z");
+        alert("Dude, that's not even a letter.");
+        
     }
-
-    // if letter is in the secret word and hasn't been guessed yet, 
-    if (secretWord.indexOf(guess) !== -1 && lettersGuessed.indexOf(guess) === -1){
-        var idxWithGuess = [];
-        var idx = secretWord.indexOf(guess);
-
-        while (idx != -1) {
-            idxWithGuess.push(idx);
-            idx = secretWord.indexOf(guess, idx + 1);
-        }
-        idxWithGuess.forEach( function (index) {
-            currentWordFormatted[index] = guess;
-        });
-
-        lettersGuessed.push(guess);
-    } else if (secretWord.indexOf(guess) === -1 && lettersGuessed.indexOf(guess) === -1) {
-        lettersGuessed.push(guess);
-        updateGuesses();
-        imgNum++;
-        nextImg(imgNum);
-    }
-
-    console.log(currentWordFormatted);
-    console.log(secretWord);
-
-    updateLettersGuessed();
-    updateCurrentWords();
-
-    // if (currentWordFormatted.join() === secretWord.join()) {
-        
-    //     wins++;
-    //     document.getElementById("winLose").innerHTML = "<h1>Winner. Press any key to play again.</h1>";
-    //     document.onkeyup = function (event) {
-    //         resetGame();
-    //         playGame();
-    //         resetImg();
-    //     }
-
-    // }
-    // if (guessesRemaining <= 0) {
-        
-    //     losses++;
-    //     document.getElementById("winLose").innerHTML = "<h1>Loser. Word was " + secretWord.join('') + "." + "<br>" + "Press any key to play again.</h1>";
-    //     document.onkeyup = function (event) {
-    //         resetGame();
-    //         playGame();
-    //         resetImg();
-    //     }
-    // };
-
-    if (currentWordFormatted.join() === secretWord.join()) {
-        
-        wins++;
-        document.getElementById('mainBody').classList.add('hide');
-        document.getElementById("winLose").innerHTML = '<div class="jumbotron fixed-top m-5 text-center" ><h1>Winner!</h1>' + "<br>" + '<h1>Press any key to play again.</h1></div>';
-        document.onkeyup = function (event) {
-            resetGame();
-            playGame();
-            resetImg();
-        }
-
-    }
-    if (guessesRemaining <= 0) {
-        
-        losses++;
-        document.getElementById('mainBody').classList.add('hide');
-        document.getElementById("winLose").innerHTML = '<div class="jumbotron fixed-top m-5 text-center" ><h1>Loser. Word was ' + '"' + secretWord.join('') + '"' + ".</h1>" + "<br>" + '<h1>Press any key to play again.</h1></div>';
-        document.onkeyup = function (event) {
-            resetGame();
-            playGame();
-            resetImg();
-        }
-    };
-
-    updateScore ();
 }
 }
 
